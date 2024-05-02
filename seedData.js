@@ -3,7 +3,9 @@ const Question = require("./src/models/questionModel");
 const Option = require("./src/models/optionModel");
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost/polling_system", {
+const uri = `mongodb+srv://rahul2pathak3297:NJdApvDYv2kU1Lni@cluster0.9wavjba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

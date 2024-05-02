@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -8,7 +10,10 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 
 // Connect to the database
-mongoose.connect("mongodb://localhost/polling_system", {
+
+const uri = `mongodb+srv://rahul2pathak3297:${process.env.MONGODB_PASSWORD}@cluster0.9wavjba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

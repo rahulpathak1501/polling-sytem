@@ -1,5 +1,7 @@
 const Question = require("../models/questionModel");
 const Option = require("../models/optionModel");
+// require("dotenv").config();
+// const uri = `mongodb+srv://rahul2pathak3297:${process.env.MONGODB_PASSWORD}@cluster0.9wavjba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 exports.createQuestion = async (req, res) => {
   try {
@@ -80,7 +82,7 @@ exports.viewQuestion = async (req, res) => {
       id: option._id,
       text: option.text,
       votes: option.votes,
-      link_to_vote: `http://localhost:8000/options/${option._id}/add_vote`,
+      link_to_vote: `https://polling-sytem.onrender.com/options/${option._id}/add_vote`,
     }));
 
     const formattedQuestion = {

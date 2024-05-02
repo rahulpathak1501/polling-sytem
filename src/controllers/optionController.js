@@ -1,23 +1,28 @@
 const Option = require("../models/optionModel");
 const Question = require("../models/questionModel");
 
-exports.createOption = async (req, res, next) => {
+exports.createOption = async (questionId, optionText) => {
   try {
-    const { id } = req.params;
-    const { text } = req.body;
+    const response = await fetch(
+      `https://polling-system.onrender.com/questions/${questionId}/options/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: optionText }),
+      }
+    );
 
-    const question = await Question.findById(id);
-    if (!question) {
-      return res.status(404).json({ error: "Question not found" });
+    if (!response.ok) {
+      throw new Error("Failed to create option");
     }
 
-    const option = await Option.create({ text });
-    question.options.push(option);
-    await question.save();
-
-    res.status(201).json({ success: true, option });
+    const option = await response.json();
+    console.log("Option created:", option);
+    return option;
   } catch (error) {
-    next(error);
+    console.error("Error creating option:", error.message);
   }
 };
 

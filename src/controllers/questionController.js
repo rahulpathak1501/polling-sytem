@@ -82,7 +82,7 @@ exports.viewQuestion = async (req, res) => {
       id: option._id,
       text: option.text,
       votes: option.votes,
-      link_to_vote: `https://polling-sytem.onrender.com/options/${option._id}/add_vote`,
+      link_to_vote: `https://polling-system.onrender.com/options/${option._id}/add_vote`,
     }));
 
     const formattedQuestion = {
@@ -93,6 +93,7 @@ exports.viewQuestion = async (req, res) => {
 
     res.status(200).json(formattedQuestion);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

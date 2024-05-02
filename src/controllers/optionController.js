@@ -7,6 +7,7 @@ exports.createOption = async (req, res, next) => {
     const { text } = req.body;
 
     const question = await Question.findById(id);
+    console.log(question);
     if (!question) {
       return res.status(404).json({ error: "Question not found" });
     }
